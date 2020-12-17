@@ -28,13 +28,11 @@ $forname = $_POST['txtForename'];
 $surname = $_POST['txtSurname']; 
 $email = $_POST['txtEmail']; 
 $password = $_POST['txtPassword']; 
+$dob = $_POST['txtDoB']; 
+$address = $_POST['txtAddress']; 
 
 
-if (($username !== '' )&&($forname !== '' )&&($surname !== '' )&&($email !== '' )&&($password !== '')) {
-    $uppercase = preg_match('@[A-Z]@', $password);
-    $lowercase = preg_match('@[a-z]@', $password);
-    $number    = preg_match('@[0-9]@', $password);
-    $specialChars = preg_match('@[^\w]@', $password);
+if (($username !== '' )&&($forname !== '' )&&($surname !== '' )&&($email !== '' )&&($password !== '')&&($dob !== '')&&($address !== '')) {
     if((!preg_match("#[a-zA-Z]+#", $password)) || (!preg_match("#[0-9]+#", $password)) || (strlen($password) < 8)) {
         $_SESSION['registered_error'] = "Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.";
         header('Location: index.php');
@@ -44,9 +42,8 @@ if (($username !== '' )&&($forname !== '' )&&($surname !== '' )&&($email !== '' 
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
         //  INSERT query   , check hash variable in the Values statement 
-        $stmt = $conn->prepare("INSERT INTO systemuser (Username, Password, Forename, Surname, Email) Values(? , ? , ? , ? , ?)");
-        $stmt->bind_param("sssss", $username, $passwordHash, $forname, $surname, $email);
-        //$userQuery = "INSERT INTO systemuser (Username, Password, Forename, Surname, Email) Values('$username', '$passwordHash', '$forname', '$surname', '$email')";
+        $stmt = $conn->prepare("INSERT INTO systemuser (Username, Password, Forename, Surname, Email, DateOfBirth, Address) Values(? , ? , ? , ? , ?, CAST( ? as date ) , ? )");
+        $stmt->bind_param("sssssss", $username, $passwordHash, $forname, $surname, $email, $dob, $address );
 
         if ($stmt->execute())
         {

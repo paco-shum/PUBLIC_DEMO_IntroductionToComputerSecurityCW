@@ -60,6 +60,14 @@ if(empty($_SESSION["csrf_token"])) {
 
                 echo "Password:";
                 echo "<input name='txtPassword' type='password'/>";
+                echo "<br/>"; 
+
+                echo "Date of Birth:";
+                echo "<input name='txtDoB' type='date'/>";
+                echo "<br/>"; 
+
+                echo "Address:";
+                echo "<input name='txtAddress' type='text'/>";
                 echo "<br/><br/>"; 
 
                 echo "<label for='captcha'>Please Enter the Captcha Text</label>";

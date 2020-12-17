@@ -44,7 +44,7 @@ if ($userResult->num_rows > 0)
 		{
 			$userFound = 1; 
 			
-			// decode Base64 stored value of password
+			// compare stored value of password
 			$getPasswordHash = $userRow['Password'];
 			
 			if (password_verify( $password, $getPasswordHash))

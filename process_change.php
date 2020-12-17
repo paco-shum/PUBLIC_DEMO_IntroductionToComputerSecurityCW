@@ -43,37 +43,45 @@ if ($userResult->num_rows > 0)
     {
 		if ($userRow['Username'] == $username)
 		{
-			$userFound = 1; 
-			
-			// decode Base64 stored value of password
-			$getPasswordHash = $userRow['Password'];
-			
-			if (password_verify( $oldpassword, $getPasswordHash))
-			{
-                //password encryption
-                $newpasswordHash = password_hash($newpassword, PASSWORD_DEFAULT);
-				//  update query   , check hash variable in the Values statement 
-				$stmt = $conn->prepare("UPDATE SystemUser SET Password = ? WHERE Username = ? ");
-				$stmt->bind_param("ss", $newpasswordHash, $username);
-                //$userQuery = "UPDATE SystemUser SET Password = '$newpasswordHash' WHERE Username = '$username'";
-                if ($stmt->execute())
-                {
-					session_regenerate_id();
-					$_SESSION['name'] = $_POST['txtUsername'];
-					$_SESSION['id'] = $id;
-					$_SESSION['changed'] = TRUE;
-					header('Location: submitted.php');
-                }
-                else
-                {
-					$_SESSION['change_error'] = "Error, something is not right. Please check your details again.";
-					header('Location: changePassword.php');
-                }
-			}
-			else
-			{
-                $_SESSION['change_error'] = "Error, something is not right. Please check your details again.";
-				header('Location: changePassword.php');
+			if (($oldpassword !== '')&&($newpassword !== '')) {
+				if((!preg_match("#[a-zA-Z]+#", $newpassword)) || (!preg_match("#[0-9]+#", $newpassword)) || (strlen($newpassword) < 8)) {
+					$_SESSION['registered_error'] = "Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.";
+					header('Location: index.php');
+				}
+				else {
+						$userFound = 1; 
+						
+						// decode Base64 stored value of password
+						$getPasswordHash = $userRow['Password'];
+						
+						if (password_verify( $oldpassword, $getPasswordHash))
+						{
+							//password encryption
+							$newpasswordHash = password_hash($newpassword, PASSWORD_DEFAULT);
+							//  update query   , check hash variable in the Values statement 
+							$stmt = $conn->prepare("UPDATE SystemUser SET Password = ? WHERE Username = ? ");
+							$stmt->bind_param("ss", $newpasswordHash, $username);
+							//$userQuery = "UPDATE SystemUser SET Password = '$newpasswordHash' WHERE Username = '$username'";
+							if ($stmt->execute())
+							{
+								session_regenerate_id();
+								$_SESSION['name'] = $_POST['txtUsername'];
+								$_SESSION['id'] = $id;
+								$_SESSION['changed'] = TRUE;
+								header('Location: submitted.php');
+							}
+							else
+							{
+								$_SESSION['change_error'] = "Error, something is not right. Please check your details again.";
+								header('Location: changePassword.php');
+							}
+						}
+						else
+						{
+							$_SESSION['change_error'] = "Error, something is not right. Please check your details again.";
+							header('Location: changePassword.php');
+						}
+					}
 			}
 		}
 	}
