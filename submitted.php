@@ -30,10 +30,10 @@ session_start();
             <br>
             <?php
             if (isset($_SESSION['registered'])) {
-                echo "<h3>Hi ".$_SESSION['name'].", you've now registered!</h3>";
+                echo "<h3>Hi ".htmlspecialchars($_SESSION['name'], ENT_QUOTES, 'UTF-8').", you've now registered!</h3>";
                 session_destroy();
             }elseif (isset($_SESSION['changed'])) {
-                echo "<h3>Hi ".$_SESSION['name'].", you've now changed your password!</h3>";
+                echo "<h3>Hi ".htmlspecialchars($_SESSION['name'], ENT_QUOTES, 'UTF-8').", you've now changed your password!</h3>";
                 session_destroy();
             }else {
                 session_destroy();

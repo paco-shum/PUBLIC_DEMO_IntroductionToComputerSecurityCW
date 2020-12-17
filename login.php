@@ -45,14 +45,21 @@ if(empty($_SESSION["csrf_token"])) {
                     echo "<br />Password: ";
                     echo "<input name='txtPassword' type='password'>";
                     echo "<br/><br/>"; 
+                    echo "<label for='captcha'>Please Enter the Captcha Text</label>";
+                    echo "<br/>"; 
+                    echo "<img src='captcha.php' alt='CAPTCHA' class='captcha-image'><i class='fas fa-redo refresh-captcha'></i>";
+                    echo "<br/>"; 
+                    echo "<input type='text' id='captcha' name='captcha_challenge' pattern='[A-Z]{6}'>";
                     echo "<input type='hidden' name='csrf_token' value=".$_SESSION["csrf_token"].">"; 
+
+                    echo "<br/><br/>"; 
                     echo "<input type='submit' value='Login'>";
                     echo "</form>";
                     if (isset($_SESSION['wrong'])) {
                         echo "<h3>Error, something is not right. Please check your details again.</h3>";
                     }
                 } elseif (isset($_SESSION['loggedin'])) {
-                    echo "<h2>Hi "  .$_SESSION['name'] . ", You are logged-in</h2>";
+                    echo "<h2>Hi "  .htmlspecialchars($_SESSION['name'], ENT_QUOTES, 'UTF-8'). ", You are logged-in</h2>";
                     echo "<form action='process_logout.php' method='post'>";
                     echo "<pre>";
 

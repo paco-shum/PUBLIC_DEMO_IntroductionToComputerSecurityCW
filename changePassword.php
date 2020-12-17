@@ -50,7 +50,12 @@ if(empty($_SESSION["csrf_token"])) {
             echo "<br/>"; 
             echo "New Password ";
             echo "<input name='txtNewPassword' type='password'>";
-
+            echo "<br/><br/>"; 
+            echo "<label for='captcha'>Please Enter the Captcha Text</label>";
+            echo "<br/>"; 
+            echo "<img src='captcha.php' alt='CAPTCHA' class='captcha-image'><i class='fas fa-redo refresh-captcha'></i>";
+            echo "<br/>"; 
+            echo "<input type='text' id='captcha' name='captcha_challenge' pattern='[A-Z]{6}'>";
             echo "<input type='hidden' name='csrf_token' value=".$_SESSION["csrf_token"].">"; 
 
             echo "<br/><br/>"; 

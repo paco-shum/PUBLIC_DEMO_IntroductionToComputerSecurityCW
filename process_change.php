@@ -7,6 +7,9 @@ if(!empty($_POST["csrf_token"])) {
 		die("CSRF token validation failed");
 	}
 }
+if(!(isset($_POST['captcha_challenge']) && $_POST['captcha_challenge'] == $_SESSION['captcha_text'])) {
+	die("captcha_challenge failed");
+}
 // server and db connection values
  $servername = "localhost";
  $rootUser="root";
