@@ -1,0 +1,173 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Tahoma, Geneva, sans-serif;
+}
+body{
+    max-width: 1200px;
+    margin: 0 auto 0 auto;
+    background-color: rgb(229, 229, 229);
+}
+ul.nav{
+    list-style: none;
+    overflow: hidden;
+    background-color: rgba(255,255,255,0.7);
+}
+.nav li{
+    float: right;
+}
+li.name{
+    float: left;
+    font-size: 110%;
+    padding-left: 15px;
+}
+.nav li a{
+    display: block;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+}
+.menu{
+    display: none;
+}
+.nav p{
+    font-size: 130%;
+    padding: 10px 13px;
+}
+.nav li p:hover:not(.active){
+    background-color: rgba(0,0,0,0.5);
+    color:white; 
+}
+.active {
+    background-color: black;
+    color: white;
+}
+
+
+
+
+
+.main{
+    background-color: rgb(255,255,255);
+}
+.footer p{
+    text-align: center;
+    background-color: rgb(40, 40, 40);
+    color: white;
+    padding: 1%;
+}
+
+
+
+
+
+
+.banner{
+    background-image: url(media/brighton.jpg);
+    height: 200px;
+    background-position: 100% 48%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+h1.title{
+    top: 116px;
+    position: relative;
+    background-color: rgba(255,255,255,0.7);
+    padding-left: 2%;
+}
+.home_banner, .hobbies_banner{
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+.home_banner img, .hobbies_banner img{
+    width: 100%;
+}
+.hobbies_banner h2{
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    color: black;
+    background-color: rgba(255,255,255,0.7);
+    padding: 5px;
+}
+.hobbies_banner p{
+    position: absolute;
+    top: 90px;
+    left: 50%;
+    width: 47%;
+    color: black;
+    background-color: rgba(255,255,255,0.7);
+    padding: 1%;
+}
+.hobbies_banner h6,.home_banner h6{
+    position: absolute;
+    bottom: 2%;
+    right: 1%;
+    color: white;
+    background-color: rgba(0,0,0,0.7);
+    padding: 5px;
+    text-align: right;
+}
+.home_banner a{
+    color: white;
+}
+.home_banner h1{
+    position: absolute;
+    top: 20%;
+    left: 54%;
+    color: white;
+    padding: 5px;
+    font-size: 345%;
+    border: 2px solid white;
+    border-radius: 12px;
+    width: 330px;;
+}
+
+
+
+
+
+.main_text{
+    padding: 3%;
+    overflow: auto;
+}
+
+.cwork_text{
+    padding: 1%;
+    width: 75%;
+    float: right;
+}
+.sidebar{
+    width: 150px;
+    float: left;
+    position: fixed;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 1%;
+}
+.sidebar ul{
+    margin-left: 15%;
+    color: black;
+}
+.sidebar a, .sidebar h3{
+    color: black;
+}
+.lab2 img{
+    width: 350px;
+}
+.lab34 img{
+    width: 100%;
+}
+#canvas{
+    height: 600px;
+    width: 800px;
+    margin: 0 auto;
+    text-align: left;
+}
+#start{
+    padding: 5px;
+    width: 100%;
+}
+
+
