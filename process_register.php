@@ -1,5 +1,12 @@
 <?php
 session_start();
+if(!empty($_POST["csrf_token"])) {
+	if (!(hash_equals($_SESSION['csrf_token'], $_POST['csrf_token']))) {
+		// Reset token
+		unset($_SESSION["csrf_token"]);
+		die("CSRF token validation failed");
+	}
+}
  $servername = "localhost";
  $rootuser="root";
  $db="socnet";

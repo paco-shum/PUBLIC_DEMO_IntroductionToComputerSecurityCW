@@ -1,5 +1,14 @@
 <?php
 session_start();
+// Check if a token is present for the current session
+if(empty($_SESSION["csrf_token"])) {
+    // No token present, generate a new one
+    $token = bin2hex(random_bytes(64));
+    $_SESSION["csrf_token"] = $token;
+} else {
+    // Reuse the token
+    $token = $_SESSION["csrf_token"];
+}
 ?>
 <!DOCTYPE html>
 <head>
@@ -36,10 +45,11 @@ session_start();
                     echo "<br />Password: ";
                     echo "<input name='txtPassword' type='password'>";
                     echo "<br/><br/>"; 
+                    echo "<input type='hidden' name='csrf_token' value=".$_SESSION["csrf_token"].">"; 
                     echo "<input type='submit' value='Login'>";
                     echo "</form>";
                     if (isset($_SESSION['wrong'])) {
-                        echo "<h3>Wrong Password</h3>";
+                        echo "<h3>Error, something is not right. Please check your details again.</h3>";
                     }
                 } elseif (isset($_SESSION['loggedin'])) {
                     echo "<h2>Hi "  .$_SESSION['name'] . ", You are logged-in</h2>";
