@@ -36,9 +36,6 @@ if ($userResult->num_rows > 0)
 			
 			// decode Base64 stored value of password
 			$getPasswordHash = $userRow['Password'];
-			//$storedPasswordBase64 = base64_decode($userRow['Password']);
-			
-			
 			
 			if (password_verify( $password, $getPasswordHash))
 			{

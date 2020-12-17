@@ -42,9 +42,11 @@ if ($userResult->num_rows > 0)
 			{
                 //password encryption
                 $newpasswordHash = password_hash($newpassword, PASSWORD_DEFAULT);
-                //  update query   , check hash variable in the Values statement 
-                $userQuery = "UPDATE SystemUser SET Password = '$newpasswordHash' WHERE Username = '$username'";
-                if ($conn->query($userQuery) == TRUE)
+				//  update query   , check hash variable in the Values statement 
+				$stmt = $conn->prepare("UPDATE SystemUser SET Password = ? WHERE Username = ? ");
+				$stmt->bind_param("ss", $newpasswordHash, $username);
+                //$userQuery = "UPDATE SystemUser SET Password = '$newpasswordHash' WHERE Username = '$username'";
+                if ($stmt->execute())
                 {
 					session_regenerate_id();
 					$_SESSION['name'] = $_POST['txtUsername'];
@@ -71,6 +73,7 @@ if ($userFound == 0)
 	$_SESSION['change_error'] = "Error, something is not right. Please check your details again.";
 	header('Location: changePassword.php');
 }
- 
+$stmt->close();
+$conn->close();
  ?>
 
